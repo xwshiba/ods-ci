@@ -591,15 +591,3 @@ CleanUp JupyterHub For N Users
         Fix Spawner Status
     END
     [Teardown]    SeleniumLibrary.Close All Browsers
-
-Open New Notebook From Launcher
-    [Documentation]     Opens a new Jupyterlab Launcher and Opens New Notebook from the Launcher
-    ${is_launcher_selected} =  Run Keyword And Return Status  JupyterLab Launcher Tab Is Selected
-    Run Keyword If  not ${is_launcher_selected}  Open JupyterLab Launcher
-    Click Element  xpath:${JUPYTERHUB_DROPDOWN_XPATH}\[1]
-    Open With JupyterLab Menu  File  New  Notebook
-    Sleep  1
-    Maybe Close Popup
-    Close Other JupyterLab Tabs
-    Maybe Close Popup
-    Sleep  1
