@@ -1,15 +1,15 @@
 #!/bin/bash
 
-SKIP_OC_LOGIN=false
+SKIP_OC_LOGIN=true
 SERVICE_ACCOUNT=""
 SA_NAMESPACE="default"
-SET_RHODS_URLS=false
-TEST_CASE_FILE=tests/Tests
+SET_RHODS_URLS=true
+TEST_CASE_FILE=tests/Tests/500__jupyterhub/ope-test-versions.robot
 TEST_VARIABLES_FILE=test-variables.yml
 TEST_VARIABLES=""
 TEST_ARTIFACT_DIR="test-output"
 EXTRA_ROBOT_ARGS=""
-SKIP_PIP_INSTALL=0
+SKIP_PIP_INSTALL=1
 TEST_INCLUDE_TAG=""
 TEST_EXCLUDE_TAG=""
 EMAIL_REPORT=false

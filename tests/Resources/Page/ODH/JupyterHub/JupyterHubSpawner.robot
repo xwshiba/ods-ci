@@ -179,7 +179,7 @@ Spawn Notebook
                     END
                 END
             ELSE IF  ${control_panel_visible}==True
-                # If the user has been redirected to the control panel, 
+                # If the user has been redirected to the control panel,
                 # move to the server and continue execution
                 Click Button    Return to server
                 Return From Keyword
@@ -430,7 +430,7 @@ Maybe Handle Server Not Running Page
 Get Container Size
    [Documentation]   This keyword capture the size from JH spawner page based on container size
    [Arguments]  ${container_size}
-   Wait Until Page Contains Element    ${KFNBC_CONTAINER_SIZE_TITLE}   
+   Wait Until Page Contains Element    ${KFNBC_CONTAINER_SIZE_TITLE}
    ...    timeout=30   error=Container size selector is not present in KFNBC Spawner
    Click Element    xpath:${KFNBC_CONTAINER_SIZE_DROPDOWN_XPATH}
    Wait Until Page Contains Element    xpath://span[.="${container_size}"]/../..  timeout=10
@@ -591,3 +591,15 @@ CleanUp JupyterHub For N Users
         Fix Spawner Status
     END
     [Teardown]    SeleniumLibrary.Close All Browsers
+
+Open New Notebook From Launcher
+    [Documentation]     Opens a new Jupyterlab Launcher and Opens New Notebook from the Launcher
+    ${is_launcher_selected} =  Run Keyword And Return Status  JupyterLab Launcher Tab Is Selected
+    Run Keyword If  not ${is_launcher_selected}  Open JupyterLab Launcher
+    Click Element  xpath:${JUPYTERHUB_DROPDOWN_XPATH}\[1]
+    Open With JupyterLab Menu  File  New  Notebook
+    Sleep  1
+    Maybe Close Popup
+    Close Other JupyterLab Tabs
+    Maybe Close Popup
+    Sleep  1

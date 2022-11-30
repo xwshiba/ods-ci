@@ -139,7 +139,6 @@ Python Version Check
   ${vers} =  Get Substring  ${output}  0  3
   ${status} =  Run Keyword And Return Status  Should Match  ${vers}  ${expected_version}
   Run Keyword If  '${status}' == 'FAIL'  Run Keyword And Continue On Failure  FAIL  "Expected Python at version ${expected_version}, but found at v ${vers}"
-  
 
 Maybe Select Kernel
   ${is_kernel_selected} =  Run Keyword And Return Status  Page Should Not Contain Element  xpath=//div[@class="jp-Dialog-buttonLabel"][.="Select"]
@@ -448,7 +447,7 @@ Clone Repo
     Navigate Home (Root folder) In JupyterLab Sidebar File Browser
     Open With JupyterLab Menu    Git    Clone a Repository
     Input Text    //div[.="Clone a repo"]/../div[contains(@class, "jp-Dialog-body")]//input    ${repo_url}
-    Click Element    xpath://div[.="CLONE"]
+    Click Element    xpath://div[.="Clone"]
 
 
 Clone Repo and Return Error Message

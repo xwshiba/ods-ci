@@ -12,11 +12,9 @@ Suite Teardown   Plugin Testing Suite Teardown
 Force Tags       JupyterHub
 
 *** Variables ***
-@{notebook_images}             s2i-minimal-notebook    s2i-generic-data-science-notebook    tensorflow   pytorch
-@{s2i-minimal-notebook}      @jupyterlab/git      nbdime-jupyterlab     Python 3.8
-@{s2i-generic-data-science-notebook}   @jupyterlab/git      @jupyter-widgets/jupyterlab-manager    jupyterlab_requirements   nbdime-jupyterlab   jupyterlab-plotly   jupyterlab-s3-browser   @bokeh/jupyter_bokeh   @jupyter-server/resource-usage  @krassowski/jupyterlab-lsp   @elyra/metadata-extension  @elyra/python-editor-extension  @elyra/theme-extension   Python 3.8
-@{tensorflow}   @jupyterlab/git   @jupyter-widgets/jupyterlab-manager   jupyterlab-s3-browser   nbdime-jupyterlab  jupyterlab-plotly  @jupyter-server/resource-usage   @krassowski/jupyterlab-lsp   @bokeh/jupyter_bokeh   @elyra/metadata-extension   @elyra/python-editor-extension   @elyra/theme-extension    Python 3.8
-@{pytorch}   @jupyterlab/git   @jupyter-widgets/jupyterlab-manager   jupyterlab-s3-browser    nbdime-jupyterlab   jupyterlab-plotly   @jupyter-server/resource-usage    @krassowski/jupyterlab-lsp   @bokeh/jupyter_bokeh    @elyra/metadata-extension   @elyra/python-editor-extension   @elyra/theme-extension   Python 3.8
+${ope_image}            byon-1669072197263
+@{notebook_images}             ${ope_image}
+@{ope}    @jupyterlab/git      jupyterlab_pygments      jupyterlab-jupytext      jupyterlab-myst      nbdime-jupyterlab      rise-jupyterlab      @agoose77/jupyterlab-markup      @deathbeds/ipydrawio      @deathbeds/ipydrawio-jupyter-templates      @deathbeds/ipydrawio-notebook      @deathbeds/ipydrawio-pdf      @deathbeds/ipydrawio-webpack      @ijmbarr/jupyterlab_spellchecker      @jupyter-widgets/jupyterlab-manager      Python 3.10
 &{temporary_data}
 &{image_mismatch_plugins}
 
@@ -49,8 +47,7 @@ Plugin Testing Suite Teardown
    Run Keyword And Return Status    Run   oc delete pod ${notebook_pod_name} -n rhods-notebooks
 
 Gather Notebook data
-   ${notebook_data}             Create Dictionary          s2i-minimal-notebook=${s2i-minimal-notebook}       s2i-generic-data-science-notebook=${s2i-generic-data-science-notebook}
-   ...                          tensorflow=${tensorflow}       pytorch=${pytorch}
+   ${notebook_data}             Create Dictionary          ${ope_image}=${ope}
    Set Suite Variable     ${notebook_data}
    Run Keyword And Return Status    Run   oc delete pod ${notebook_pod_name} -n rhods-notebooks
 
@@ -61,7 +58,7 @@ Get the List of Plugins from RHODS notebook images
       ${temp_data}      Get Install Plugin list from JupyterLab
       ${py_version_message}    Run   oc exec ${notebook_pod_name} -n rhods-notebooks -- python --version
       ${py_version}           Split String From Right	  ${py_version_message}  	\n    1
-      ${python_image}           Split String From Right	  ${py_version}[-1]  	.    1
+      ${python_image}         Split String From Right	  ${py_version}[-1]  	.    1
       Append To List           ${temp_data}         ${python_image}[0]
       Log    ${temp_data}
       Set To Dictionary   ${temporary_data}      ${image}     ${temp_data}
