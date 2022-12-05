@@ -1,7 +1,14 @@
-# ODS-CI
+# ODS-CI OPE (Open Source Education)
 
 ODS-CI is a framework to test Red Hat Open Data Science features and functionality
-using QE tiered testing.
+using QE tiered testing. ODS-CI ope-test branch includes 6 extra tests for [OPE (Open Source Education) test image](https://github.com/xwshiba/ope/tree/container-burosa-test) in `ods-ci/tests/Tests/500__jupyterhub`.
+
+ - ope-test-jupyterlab-git-testbook.robot
+ - ope-test-versions.robot
+ - ope-plugin-verification.robot
+ - ope-test-folder-permissions.robot
+ - ope-test-filling-pvc.robot
+ - ope-test-jupyterlab-time.robot
 
 # Requirements
   Linux distribution that supports Selenium automation of a chromium web browser using [ChromeDriver](https://chromedriver.chromium.org)
@@ -31,12 +38,18 @@ using QE tiered testing.
     ```
     This script is a wrapper for creating the python virtual environment and running the Robot Framework CLI.  You can run any of the test cases by creating the python virual environment, install the packages in requirements.txt and running the `robot` command directly
 
-# Contributing
+ # Common Errors and Solutions
 
-See [CONTRIBUTING.md](./CONTRIBUTING.md)
+ Some errors may come up when developing new tests. Here are the common error types:
+ - RHODS front-end UI difference between versions;
+ - Test account not clean up due to previous failure;
+ - Missing user Interaction steps in test files.
 
-# ODS-CI Container Image
-See build [README](build/README.md) on how you can build a container to run ODS-CI automation in OpenShift.
+ Solution for the above errors:
+ - Check latest front-end;
+ - Manually clean up the test account;
+ - Check existing resources or add missing interaction steps.
 
-# License
-This project is open sourced under MIT License.
+# More Questions
+If you have more questions regarding OPE tests, please let us know through opening an issue. 
+Otherwise, please direct your question to the upstream ods-ci.
