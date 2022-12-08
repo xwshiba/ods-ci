@@ -31,6 +31,10 @@ using QE tiered testing. ODS-CI ope-test branch includes 6 extra tests for [OPE 
      * Test user credentials.
      * Browser webdriver to use for testing.
 
+     **Note** for ope tests, it is recommended to use `chrome` as browser to witness the automated testing process. If using `headlesschrome`, the tests will only run in the background.
+     
+     Also, `test-variables.yml.example` **only** includes the **ncecessary credentials** for running ope tests. Check `main` branch to review all the credentials needed for other tests.
+
 
   1. Run this script that will create the virtual environment, install the required packages and kickoff the Robot test suite
     ```bash
